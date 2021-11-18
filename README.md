@@ -30,22 +30,23 @@ All the necessary packages are already listed in package.json. So just run `npm 
 ### Part 0: Getting all the blog-posts with similar tags
 
 Build a custom method to get all the blogs with similar tags and create the controller function to handle it.
+i.e if the current blog post has tags `["tag1", "tag2"]` then get all the blog posts with tags `"tag1"` or `"tag2"`
 
 ### Part 1: Getting all the authors with the same areas of expertise
 
-Build a custom method to get all the authors with the same area of expertise and create the controller function to handle it.
+Build a custom method to get all the authors with the similar areas of expertise and create the controller function to handle it.
 
 ### Part 2: Getting the author full name
 
-Build a virtual field which has a get function to get the full name of the author and build the endpoint to get it.
+Build a virtual field called `fullName` which has a get function to get the full name of the author and build the endpoint to get it.
 
 ### Part 3: Updating the author full name
 
-Write the set function for the full name virtual field to update both the first name and last name of the author and build the endpoint to update it.
+Write the set function for the `fullName` virtual field to update both the first name and last name of the author and build the endpoint to update it.
 
 ### Part 4: Getting the time of a blog-post creation from a different timezone
 
-Create a virtual field called createdAtGMT to get the time of a blog-post creation in GMT (Turkey time -3) and create the controller function to handle it.
+Create a virtual field called `createdAtGMT` to get the time of a blog-post creation in GMT (Turkey time -3) and create the controller function to handle it.
 
 ## Submission
 
