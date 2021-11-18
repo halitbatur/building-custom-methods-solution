@@ -1,17 +1,23 @@
-const db = require("./db/connection");
 const express = require("express");
-const bodyParser = require("body-parser");
+require("dotenv").config();
 
-const blogPostsController = require("./controllers/blog-post");
-const authorsController = require("./controllers/author");
+const connectToMongo = require("./db/connection");
+
+const blogPostRoutes = require("./routes/blog-post");
+const authorRoutes = require("./routes/author");
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const port = process.env.NODE_LOCAL_PORT;
 
-app.use(blogPostsController);
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-const port = 3000;
+app.use("/api/blogposts", blogPostRoutes);
+app.use("/api/authors", authorRoutes);
+
 app.listen(port, () => {
-  console.log(`listening on ${port}`);
+  console.log(`Server listening on port ${port}`);
+  connectToMongo();
 });
+
+module.exports = app;

@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
-const url = "mongodb://127.0.0.1:27017/blogs-db";
 
-mongoose.connect(url, { useNewUrlParser: true });
+const url = process.env.DB_URL;
 
-db = mongoose.connection;
+const connectToMongo = () => {
+  mongoose.connect(url, { useNewUrlParser: true });
 
-db.once("open", () => {
-  console.log("Database connected:", url);
-});
+  db = mongoose.connection;
 
-db.on("error", (err) => {
-  console.error("connection error:", err);
-});
+  db.once("open", () => {
+    console.log("Database connected: ", url);
+  });
 
-module.exports = db;
+  db.on("error", (err) => {
+    console.error("Database connection error: ", err);
+  });
+};
+
+module.exports = connectToMongo;
