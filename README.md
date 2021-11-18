@@ -20,7 +20,7 @@ In this assignment folder, you will find:
 
 All the necessary packages are already listed in package.json. So just run `npm install` and `npm start` to get started.
 
-**Note**: Make sure MongoDB is running on your local machine.
+**Note**: Make sure MongoDB is running on your local machine, delete or rename your old collection so it doesn't conflict with the test and uncomment the path in the route files to activate them.
 
 ## Instructions
 
@@ -30,11 +30,14 @@ All the necessary packages are already listed in package.json. So just run `npm 
 ### Part 0: Getting all the blog-posts with similar tags
 
 Build a custom method to get all the blogs with similar tags and create the controller function to handle it.
-i.e if the current blog post has tags `["tag1", "tag2"]` then get all the blog posts with tags `"tag1"` or `"tag2"`
+
+- i.e if the current blog post has tags `["tag1", "tag2"]` then get all the blog posts with tags `"tag1"` and/or `"tag2"`
 
 ### Part 1: Getting all the authors with the same areas of expertise
 
 Build a custom method to get all the authors with the similar areas of expertise and create the controller function to handle it.
+
+- i.e if the current author is expert in `["are1", "are2"]` then get all the authors who are expert `"area1"` and/or `"area2"`
 
 ### Part 2: Getting the author full name
 
@@ -42,7 +45,7 @@ Build a virtual field called `fullName` which has a get function to get the full
 
 ### Part 3: Updating the author full name
 
-Write the set function for the `fullName` virtual field to update both the first name and last name of the author and build the endpoint to update it.
+Write the set function for the `fullName` virtual field to update both the first name and last name of all authors who has the same first name and build the controller funtion to update them.
 
 ### Part 4: Getting the time of a blog-post creation from a different timezone
 
