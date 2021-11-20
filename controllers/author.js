@@ -51,21 +51,13 @@ const filterAuthorsByEreas = async (req, res) => {
 const getAuthorsFullName = async (_, res) => {
   const blogPosts = await BlogPostModel.find();
   const authors = {};
-  /* Create a unique map of authors, it will look like this:
-    {
-        author1Name: {author1},
-        author2Name: {author2},
-        author3Name: {author3},
-        ... and so on
-    }
-    */
+
   blogPosts.forEach((blogPost) => {
     if (!authors[blogPost.author.fullName])
       authors[blogPost.author.fullName] = blogPost.author;
   });
-  // The above check ensures that only unique authors are mapped, repeated authors will be skipped
+
   res.json(Object.values(authors).map((author) => author.fullName));
-  // Return array of unique author objects
 };
 
 const updateAuthorFullName = async (req, res) => {
@@ -92,22 +84,11 @@ const updateAuthor = async (req, res) => {
     "author.name": authorName,
   };
   const updateSet = {};
-  /* Request body might give us values like this:
-    {
-        age: 28,
-        areasOfExpertise: ["design", "ux/ui", "art"]
-    }
-    */
+
   Object.keys(req.body).forEach((key) => {
     updateSet[`author.${key}`] = req.body[key];
   });
-  /* The above logic changes to:
-    {
-        "author.age": 28,
-        "author.areasOfExpertise": ["design", "ux/ui", "art"]
-    }
-    Since MongoDB query requires nested keys for author object
-    */
+
   const updatedBlogPosts = await BlogPostModel.updateMany(query, {
     $set: updateSet,
   });
