@@ -19,7 +19,28 @@ const addBlogPost = async (req, res) => {
 
 // Add your controllers below
 
+const getBlogPostsWithSimilarTags = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const targetBlogPost = await BlogPostModel.findOne({ _id: id });
+    const blogPostsWithSimilarTags =
+      await targetBlogPost.findSimilarBlogPosts();
+    res.json(blogPostsWithSimilarTags);
+  } catch (err) {
+    res.status(422).json({ message: err.message });
+  }
+};
+
+const getCreatedAtTimeGMT = async (req, res) => {
+  const { id } = req.params;
+  const blogPost = await BlogPostModel.findOne({ _id: id });
+  if (blogPost) res.json(blogPost.createdAtGMT);
+  else res.status(422).json({ message: "Not found" });
+};
+
 module.exports = {
   getAllBlogPosts,
-  addBlogPost
+  addBlogPost,
+  getBlogPostsWithSimilarTags,
+  getCreatedAtTimeGMT,
 };
