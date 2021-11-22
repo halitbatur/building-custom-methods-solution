@@ -3,9 +3,12 @@ const router = express.Router();
 
 const authorController = require("../controllers/author");
 
-router.get("/", authorController.getAllAuthors);
-router.get("/fullnames", authorController.getAuthorsFullName);
-router.put("/:firstName", authorController.updateAuthorFullName);
-router.get("/areas/:id", authorController.filterAuthorsByEreas);
+// Note: All endpoints here will have the prefix /api/authors
+
+// router.get("/:id", authorController.getAuthorDetails);
+
+// router.put("/:id", authorController.updateAuthorFullName);
+
+// router.get("/:id/similar-authors", authorController.getAuthorsWithSimilarExpertise);
 
 module.exports = router;
