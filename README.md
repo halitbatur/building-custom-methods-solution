@@ -3,53 +3,87 @@
 ## Objectives
 
 - Practice building custom methods using mongoose
-- Practice building virtual fields
+- Practice building virtual fields using mongoose
 
 ## Overview
 
-In the previous lab we practiced CRUD operations using mongoose and express. In this lab we will create custom methods to get and update differnet data in the database.
+So far we have practiced CRUD operations using Mongoose and Express. In this lab, we will create custom methods to handle some of the data in the database.
 
 ## Starter Code
 
 In this assignment folder, you will find:
 
 1. Express server setup in `/index.js` with 2 separate routers, one for blogpost API routes and one for author API routes.
-2. The database connection is setup in `db/connection.js`
+2. The database connection is setup in `db/connection.js`.
 3. The routes are configured and connected to a controller inside the `routes` folder.
-4. The initial version of the data model is created in `models/blog-post.js`. We are using the embedded approach with author embedded inside blog post.
+4. The initial version of the data model is created in `models/blog-post.js`. We are using the embedded approach with _author embedded inside blog post_.
 
 All the necessary packages are already listed in package.json. So just run `npm install` and `npm start` to get started.
 
-**Note**: Make sure MongoDB is running on your local machine, delete or rename your old collection so it doesn't conflict with the test and uncomment the path in the route files to activate them.
+**Note**: Make sure MongoDB is running on your local machine, delete or rename your old collection so it doesn't conflict with the tests and uncomment the path in the route files to activate them.
 
 ## Instructions
 
-- Add the code in the `models` folder to create the custom methods for BlogPost and Author schemas.
-- Add the code in the `controllers` folder to controller functions to handle the requests.
+- Add the code in the `models` folder to create the custom methods for BlogPost and Author.
+- Add the code in the `controllers` folder to create controller functions to handle the requests.
 
-### Part 0: Getting all the blog-posts with similar tags
+### Part 0: Getting all the related blogposts with similar tags
 
-Build a custom method to get all the blogs with similar tags and create the controller function to handle it.
+You must have seen related blogposts recommended to the reader when they finish reading the current blogpost. Build a custom method to get all the blogposts with similar tags and create the controller function to fetch these.
 
-- i.e if the current blog post has tags `["tag1", "tag2"]` then get all the blog posts with tags `"tag1"` and/or `"tag2"`
+For example, if the current blog post has tags `["tag1", "tag2"]` then get all the blog posts with the tags `"tag1"` and/or `"tag2"`.
+
+Endpoint: `GET /api/blogposts/POST_ID/similar-blogposts`
+
+Response format: `Array of similar blogposts`
 
 ### Part 1: Getting all the authors with the same areas of expertise
 
-Build a custom method to get all the authors with the similar areas of expertise and create the controller function to handle it.
+Just like related blogposts, the reader can also see recommended similar authors. Build a custom method to get all the authors with the similar areas of expertise and create the controller function to fetch these.
 
-- i.e if the current author is expert in `["are1", "are2"]` then get all the authors who are expert `"area1"` and/or `"area2"`
+For example, if the current author is expert in `["area1", "area2"]` then get all the authors who are expert in `"area1"` and/or `"area2"`.
+
+Endpoint: `GET /api/authors/AUTHOR_ID/similar-authors`
+
+Response format: `Array of similar authors`
 
 ### Part 2: Getting the author full name
 
-Build a virtual field called `fullName` which has a get function to get the full name of the author and build the endpoint to get it.
+Build a virtual field called `fullName` which has a get function to get the full name of the author and build the controller function to get the author's details which includes the full name.
+
+Endpoint: `GET /api/authors/AUTHOR_ID`
+
+Response format:
+```
+{
+    "firstName": "String",
+    "lastName": "String",
+    "fullName": "String",
+    "age": Number,
+    "gender": "String",
+    "nationality": "String",
+    "areasOfExpertise": ["String"],
+    "_id": "String"
+}
+```
 
 ### Part 3: Updating the author full name
 
-Write the set function for the `fullName` virtual field to update both the first name and last name of all authors who has the same first name and build the controller funtion to update them.
+Write the set function for the `fullName` virtual field to update both the first name and last name on the author object, and build the controller function to update the author full name on a specifc blogpost.
 
-### Part 4: Getting the time of a blog-post creation from a different timezone
+Endpoint: `PUT /api/authors/AUTHOR_ID`
 
-Create a virtual field called `createdAtGMT` to get the time of a blog-post creation in GMT (Turkey time -3) and create the controller function to handle it.
+Response format: `HTTP status code 204`
+
+### Part 4: Getting the time of creation of a blogpost in a different timezone
+
+Create a virtual field called `createdAtGMT` to get the time of a blog-post creation in GMT (Turkey time -3) and create the controller function to fetch it.
+
+Endpoint: `GET /api/blogposts/POST_ID`
+
+Response format: `GMT time as string`
+
+For example, if `createdAtTime` is 2021-11-22T13:58:00+03:00 (Turkey time), then GMT time string would be "Mon, 22 Nov 2021 10:58:00 GMT".
 
 ## Submission
 
