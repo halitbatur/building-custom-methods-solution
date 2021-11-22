@@ -1,18 +1,15 @@
-// Start coding here
-
-const blogPost = require("../models/blog-post");
 const BlogPostModel = require("../models/blog-post");
 
+// The controller to fetch all blogposts has been written for you
 const getAllBlogPosts = async (_, res) => {
-  // Simple find query to fetch all blog posts
   const blogPosts = await BlogPostModel.find();
   res.json(blogPosts);
 };
 
+// The controller to add a new blogpost has been written for you
 const addBlogPost = async (req, res) => {
   const blogPostData = req.body;
   try {
-    // Simple create query to create a new blog post with the request body
     const newBlogPost = await BlogPostModel.create(blogPostData);
     res.status(201).json(newBlogPost);
   } catch (err) {
@@ -20,7 +17,9 @@ const addBlogPost = async (req, res) => {
   }
 };
 
+// Add your controllers below
+
 module.exports = {
-  addBlogPost,
   getAllBlogPosts,
+  addBlogPost
 };

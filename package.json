@@ -1,7 +1,7 @@
 {
   "name": "curriculum-backend-building-cusotm-methods",
   "version": "1.0.0",
-  "description": "Building custom methods and virtual fields lab",
+  "description": "Building custom methods",
   "main": "index.js",
   "scripts": {
     "test": "mocha --exit --require mocha-steps ./tests",
