@@ -33,8 +33,8 @@ const getAuthorsWithSimilarExpertise = async (req, res) => {
     const targetAuthorBlogPost = await BlogPostModel.findOne({
       "author._id": id,
     });
-    const blogPostsWithSimilarAuthors =
-      await targetAuthorBlogPost.findSimilarAuthors();
+    // Calling our custom method findSimilarAuthors on the model object
+    const blogPostsWithSimilarAuthors = await targetAuthorBlogPost.findSimilarAuthors();
 
     const similarAuthors = {};
     blogPostsWithSimilarAuthors.forEach((blogPost) => {

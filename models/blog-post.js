@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// NOTE: We have not added any validation properties such as required or default, but we recommend you can add these as you prefer
 const blogAuthor = new mongoose.Schema({
   firstName: {
     type: String,
@@ -20,7 +21,7 @@ const blogAuthor = new mongoose.Schema({
     type: [String],
   },
 },
-// To ensure that virtual fields are returned to the client side
+// These properties must be added to ensure that virtual fields are returned in the read queries
 {
   toObject: {
     virtuals: true
